@@ -78,3 +78,7 @@ class Command(BaseCommand):
         print(f'Total countries  in database: {Country.objects.all().count()}')
         print(f'Total states in database: {State.objects.all().count()}')
         print(f'Total daily reports in database: {DailyReport.objects.all().count()}')
+
+
+def getdailreportlist():
+    return DailyReport.objects.all()
