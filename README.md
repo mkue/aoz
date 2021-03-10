@@ -1,11 +1,6 @@
-In PyCharm, auf Ordner `berkel/` Rechtsklick und dann auf "Mark Directory" -> "sources Root"
-
-Server starten:
-
 ```
 python manage.py runserver
 ```
-
 
 Falls models geändert wurden, muss makemigrations ausgeführt werden:
 

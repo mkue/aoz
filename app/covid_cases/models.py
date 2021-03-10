@@ -1,8 +1,6 @@
 from django.db import models
 
 
-# Create your models here.
-
 class Country(models.Model):
     name = models.CharField(max_length=255, unique=True)
     latitude = models.DecimalField(decimal_places=6, max_digits=9, null=True)
@@ -32,6 +30,6 @@ class DailyReport(models.Model):
 
     def __str__(self):
         if self.state:
-            return f'{self.country.name} - {self.state.name}'
+            return f"{self.country.name} - {self.state.name}"
         else:
             return self.country.name

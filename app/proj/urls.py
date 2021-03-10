@@ -1,4 +1,4 @@
-"""berkel URL Configuration
+"""proj URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.1/topics/http/urls/
@@ -20,7 +20,6 @@ from django.urls import path
 from covid_cases.graphql import schema
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('graphql/', GraphQLView.as_view(schema=schema), name='graphql'),
-
+    path("admin/", admin.site.urls),
+    path("graphql/", GraphQLView.as_view(schema=schema), name="graphql"),
 ]

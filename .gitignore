@@ -133,3 +133,4 @@ dmypy.json
 .idea/
 
 db.sqllite3
+/data/

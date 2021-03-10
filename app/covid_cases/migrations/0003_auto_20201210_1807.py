@@ -6,28 +6,28 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('covid_cases', '0002_auto_20201210_1757'),
+        ("covid_cases", "0002_auto_20201210_1757"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='country',
-            name='latitude',
+            model_name="country",
+            name="latitude",
             field=models.DecimalField(decimal_places=6, max_digits=9, null=True),
         ),
         migrations.AlterField(
-            model_name='country',
-            name='longitude',
+            model_name="country",
+            name="longitude",
             field=models.DecimalField(decimal_places=6, max_digits=9, null=True),
         ),
         migrations.AlterField(
-            model_name='state',
-            name='latitude',
+            model_name="state",
+            name="latitude",
             field=models.DecimalField(decimal_places=6, max_digits=9, null=True),
         ),
         migrations.AlterField(
-            model_name='state',
-            name='longitude',
+            model_name="state",
+            name="longitude",
             field=models.DecimalField(decimal_places=6, max_digits=9, null=True),
         ),
     ]
