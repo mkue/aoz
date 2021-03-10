@@ -2,8 +2,6 @@ import os
 from abc import ABC
 from dataclasses import dataclass
 
-from django.apps import AppConfig
-
 DEVELOPMENT = "development"
 TESTING = "testing"
 PRODUCTION = "production"
@@ -15,21 +13,21 @@ class DefaultConfig(ABC):
 
 
 @dataclass(frozen=True)
-class DevConfig(AppConfig):
-    csv_source_base_url = "http://file-server"
-
-
-@dataclass(frozen=True)
-class TestConfig(AppConfig):
-    csv_source_base_url = "http://file-server"
-
-
-@dataclass(frozen=True)
-class ProdConfig(AppConfig):
+class DevConfig(DefaultConfig):
     pass
 
 
-ENV_CONFIG_MAP = {DEVELOPMENT: DevConfig, TESTING: DevConfig, PRODUCTION: ProdConfig}
+@dataclass(frozen=True)
+class TestConfig(DefaultConfig):
+    csv_source_base_url = "http://file-server"
+
+
+@dataclass(frozen=True)
+class ProdConfig(DefaultConfig):
+    pass
+
+
+ENV_CONFIG_MAP = {DEVELOPMENT: DevConfig, TESTING: TestConfig, PRODUCTION: ProdConfig}
 
 app_mode = os.environ["APP_MODE"] or DEVELOPMENT
 config = ENV_CONFIG_MAP.get(app_mode.lower())
