@@ -1,4 +1,4 @@
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 
 import requests
 from huey import crontab
@@ -9,9 +9,9 @@ from covid_cases.importer import import_csv_file
 from covid_cases.models import DailyReport, Country, State
 
 
-def _run_daily_import(execution_date: date = None):
+def run_daily_import(execution_date: date = None):
     if not execution_date:
-        execution_date = datetime.now().date()
+        execution_date = datetime.now().date() - timedelta(days=1)
     r = requests.get(f"{config.csv_source_base_url}/{execution_date.strftime('%m-%d-%Y')}.csv")
     r.raise_for_status()
 
@@ -22,7 +22,6 @@ def _run_daily_import(execution_date: date = None):
     print(f"Total daily reports in database: {DailyReport.objects.all().count()}")
 
 
-# @db_periodic_task(crontab(hour="*/8"))  # run three times a day
-@db_periodic_task(crontab(minute="*"))  # run three times a day
-def run_daily_import(execution_date: date = None):
-    _run_daily_import(execution_date)
+@db_periodic_task(crontab(hour="*/8"))  # run three times a day
+def run_daily_import_task():
+    run_daily_import()

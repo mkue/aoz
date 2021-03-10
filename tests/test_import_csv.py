@@ -3,7 +3,7 @@ from datetime import date
 import pytest
 
 from covid_cases.models import DailyReport
-from covid_cases.tasks import import_csv_file, _run_daily_import
+from covid_cases.tasks import import_csv_file, run_daily_import
 
 
 @pytest.mark.django_db
@@ -20,7 +20,7 @@ from covid_cases.tasks import import_csv_file, _run_daily_import
     ],
 )
 def test_import_csv_file(execution_date: date, expected_count_switzerland_confirmed: int):
-    _run_daily_import(execution_date)
+    run_daily_import(execution_date)
 
     assert (
             DailyReport.objects.get(country__name="Switzerland", date=execution_date).confirmed

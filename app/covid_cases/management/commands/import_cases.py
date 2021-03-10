@@ -3,7 +3,7 @@ from datetime import datetime
 from django.core.management import BaseCommand
 from django.db.transaction import atomic
 
-from covid_cases.tasks import _run_daily_import
+from covid_cases.tasks import run_daily_import
 
 
 class Command(BaseCommand):
@@ -15,4 +15,4 @@ class Command(BaseCommand):
     @atomic
     def handle(self, *args, **options):
         execution_date = datetime.strptime(options["date"], "%Y-%m-%d").date()
-        _run_daily_import(execution_date)
+        run_daily_import(execution_date)
