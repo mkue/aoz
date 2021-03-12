@@ -13,6 +13,8 @@ from covid_cases.models import DailyReport, Country, State
 def run_daily_import(execution_date: date = None):
     if not execution_date:
         execution_date = datetime.now().date() - timedelta(days=1)
+
+    print(f"Importing date {execution_date}")
     r = requests.get(f"{config.csv_source_base_url}/{execution_date.strftime('%m-%d-%Y')}.csv")
     try:
         r.raise_for_status()
