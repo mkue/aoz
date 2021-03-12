@@ -3,6 +3,7 @@ from datetime import datetime, date, timedelta
 import requests
 from huey import crontab
 from huey.contrib.djhuey import db_periodic_task
+from requests import HTTPError
 
 from covid_cases import config
 from covid_cases.importer import import_csv_file
@@ -13,7 +14,11 @@ def run_daily_import(execution_date: date = None):
     if not execution_date:
         execution_date = datetime.now().date() - timedelta(days=1)
     r = requests.get(f"{config.csv_source_base_url}/{execution_date.strftime('%m-%d-%Y')}.csv")
-    r.raise_for_status()
+    try:
+        r.raise_for_status()
+    except HTTPError:
+        print("CSV files is not available")
+        return
 
     import_csv_file(r.text, execution_date)
 
